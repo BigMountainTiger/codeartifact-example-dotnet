@@ -1,0 +1,71 @@
+#!/bin/bash
+
+echo "This is a miscellaneous note"
+echo "On how to access AWS codeartifact from the client"
+
+# https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package-dotnet-cli
+#!/bin/bash
+
+# https://docs.aws.amazon.com/codeartifact/latest/ug/nuget-cli.html#nuget-consume-cli
+
+# dotnet tool install -g AWS.CodeArtifact.NuGet.CredentialProvider
+# dotnet codeartifact-creds install
+# dotnet codeartifact-creds configure set profile huge-head-li-2021
+# dotnet codeartifact-creds configure unset profile
+
+# aws codeartifact login --tool dotnet --domain testdomain --domain-owner 537548412289 --repository testnugetrepo
+
+# Use in codebuild
+# https://docs.aws.amazon.com/codeartifact/latest/ug/codebuild.html
+# https://docs.aws.amazon.com/codeartifact/latest/ug/using-nuget-packages-in-codebuild.html
+
+# aws cli credential presedence
+# https://docs.aws.amazon.com/cli/latest/topic/config-vars.html
+
+# Cross account
+# https://docs.aws.amazon.com/codeartifact/latest/ug/domain-policies.html#enabling-cross-acount-access-to-a-domain
+
+# https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
+
+# export AWS_ACCESS_KEY_ID=access...id
+# export AWS_SECRET_ACCESS_KEY=secrte...access...key
+
+# dotnet nuget list source
+# dotnet nuget add source "https://testdomain-537548412289.d.codeartifact.us-east-1.amazonaws.com/nuget/testnugetrepo/v3/index.json" -n testdomain/testnugetrepo
+# dotnet nuget remove source testdomain/testnugetrepo
+
+# Cross account permission, need to provide the following permission to the account to access
+# the code-artifact
+# {
+#     "Version": "2012-10-17",
+#     "Statement": [
+#         {
+#             "Action": "sts:GetServiceBearerToken",
+#             "Resource": "*",
+#             "Effect": "Allow"
+#         },
+#         {
+#             "Action": [
+#                 "codeartifact:GetAuthorizationToken",
+#                 "codeartifact:GetRepositoryEndpoint",
+#                 "codeartifact:ReadFromRepository",
+#                 "codeartifact:PublishPackageVersion"
+#             ],
+#             "Resource": "*",
+#             "Effect": "Allow"
+#         }
+#     ]
+# }
+
+# Add the following permission to code-pipeline
+# policyStatement = new Amazon.CDK.AWS.IAM.PolicyStatement();
+# policyStatement.AddAllResources();
+# policyStatement.AddActions(new string[] {
+#     "codeartifact:GetAuthorizationToken",
+#     "codeartifact:GetRepositoryEndpoint",
+#     "codeartifact:ReadFromRepository",
+#     "codeartifact:PublishPackageVersion",
+#     "sts:GetServiceBearerToken" 
+# });
+
+# project.AddToRolePolicy(policyStatement);

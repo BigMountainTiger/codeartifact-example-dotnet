@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd experiment-dotnet-projects/ExampleClient
+
+dotnet clean
+dotnet nuget locals --clear all
+
+dotnet run

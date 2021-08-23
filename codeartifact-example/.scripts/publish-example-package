@@ -1,0 +1,26 @@
+#!/bin/bash
+
+publish_nuget() {
+  repo="experimental-domain/experimental-repository"
+  package_directory="nuget"
+
+  dotnet clean
+  status=$(dotnet pack -o ${package_directory} | grep "Successfully created package")
+
+  echo ${status}
+
+  if [ -n "${status}" ]
+  then
+    nupkg=$(echo ${status} | grep -o "${package_directory}.*")
+    nupkg=$(echo ${nupkg::-2})
+    echo $nupkg
+
+    dotnet nuget push $nupkg --skip-duplicate --source ${repo}
+  fi
+
+};
+
+# Go to the directory and make the publish
+cd experiment-dotnet-projects/ExamplePackage
+
+publish_nuget

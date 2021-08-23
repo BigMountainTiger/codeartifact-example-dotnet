@@ -1,0 +1,11 @@
+{
+  "name": "aws-codeartifact-cdk",
+  "version": "1.0.0",
+  "author": "Song Li",
+  "private": true,
+  "dependencies": {
+    "@aws-cdk/aws-codeartifact": "^1.108.0",
+    "@aws-cdk/aws-iam": "^1.108.0",
+    "@aws-cdk/core": "1.108.0"
+  }
+}

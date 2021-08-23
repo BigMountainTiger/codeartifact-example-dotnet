@@ -1,0 +1,17 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.gitignore": true,
+    "**/cdk.out": true,
+    "**/ExampleClient/bin": true,
+    "**/ExampleClient/obj": true,
+    "**/ExamplePackage/bin": true,
+    "**/ExamplePackage/obj": true,
+    "**/ExamplePackage/nuget": true
+  }
+}
